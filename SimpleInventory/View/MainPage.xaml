@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SimpleInventory.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#7c7c7c"
+    Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+        <StackLayout>
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Button
+                    Grid.Column="0"
+                    Margin="5"
+                    BackgroundColor="#3e3e42"
+                    Text="Comida"
+                    TextColor="White" 
+                    Clicked="OnComidaSectionClick"/>
+                <Button
+                    Grid.Column="1"
+                    Margin="5"
+                    BackgroundColor="#3e3e42"
+                    Text="Bebida"
+                    TextColor="White" 
+                    Clicked="OnBebidaSectionClick"/>
+                <Button
+                    Grid.Column="2"
+                    Margin="5"
+                    BackgroundColor="#3e3e42"
+                    Text="+"
+                    TextColor="Lime" 
+                    Clicked="OnAddClick"
+                    IsEnabled="{Binding AddAndDeleteButtonsEnabled, Mode=TwoWay}"/>
+                <Button
+                    Grid.Column="3"
+                    Margin="5"
+                    BackgroundColor="#3e3e42"
+                    Text="-"
+                    TextColor="Red" 
+                    Clicked="OnDeleteClick"
+                    IsEnabled="{Binding AddAndDeleteButtonsEnabled, Mode=TwoWay}"/>
+            </Grid>
+            <ListView ItemsSource="{Binding Items, Mode=TwoWay}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" SeparatorColor="Black">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid BackgroundColor="{Binding BackgroundColor, Mode=TwoWay}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="70*" />
+                                    <ColumnDefinition Width="10*" />
+                                    <ColumnDefinition Width="10*" />
+                                    <ColumnDefinition Width="10*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label
+                                    Grid.Column="0"
+                                    Padding="10"
+                                    FontAttributes="Bold"
+                                    FontSize="Medium"
+                                    Text="{Binding Text}"
+                                    TextColor="White"
+                                    VerticalTextAlignment="Center" />
+                                <Button
+                                    Grid.Column="1"
+                                    BackgroundColor="#3e3e42"
+                                    Command="{Binding DecreaseCountCommand}"
+                                    CornerRadius="0"
+                                    FontAttributes="Bold"
+                                    FontSize="Large"
+                                    Text="-"
+                                    TextColor="White" />
+                                <Label
+                                    Grid.Column="2"
+                                    FontAttributes="Bold"
+                                    FontSize="Large"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding Count}"
+                                    VerticalOptions="Center" 
+                                    TextColor="White"/>
+                                <Button
+                                    Grid.Column="3"
+                                    BackgroundColor="#3e3e42"
+                                    Command="{Binding IncreaseCountCommand}"
+                                    CornerRadius="0"
+                                    FontAttributes="Bold"
+                                    FontSize="Large"
+                                    Text="+"
+                                    TextColor="White" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
