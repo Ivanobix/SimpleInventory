@@ -10,8 +10,9 @@
         <StackLayout>
             <Grid Margin="5">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
@@ -41,15 +42,23 @@
                     Text="+"
                     TextColor="Lime" 
                     Clicked="OnAddClick"
-                    IsEnabled="{Binding AddAndDeleteButtonsEnabled, Mode=TwoWay}"/>
+                    IsEnabled="{Binding ActionButtonsEnabled, Mode=TwoWay}"/>
                 <Button
                     Grid.Column="3"
+                    Margin="5"
+                    BackgroundColor="#3e3e42"
+                    Text="#"
+                    TextColor="Yellow" 
+                    Clicked="OnEditClick"
+                    IsEnabled="{Binding ActionButtonsEnabled, Mode=TwoWay}"/>
+                <Button
+                    Grid.Column="4"
                     Margin="5"
                     BackgroundColor="#3e3e42"
                     Text="-"
                     TextColor="Red" 
                     Clicked="OnDeleteClick"
-                    IsEnabled="{Binding AddAndDeleteButtonsEnabled, Mode=TwoWay}"/>
+                    IsEnabled="{Binding ActionButtonsEnabled, Mode=TwoWay}"/>
             </Grid>
             <ListView ItemsSource="{Binding Items, Mode=TwoWay}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" SeparatorColor="Black">
                 <ListView.ItemTemplate>

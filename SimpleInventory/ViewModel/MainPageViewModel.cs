@@ -20,13 +20,13 @@ namespace SimpleInventory.ViewModel
             }
         }
 
-        private bool addAndDeleteButtonsEnabled = false;
-        public bool AddAndDeleteButtonsEnabled
+        private bool actionButtonsEnabled = false;
+        public bool ActionButtonsEnabled
         {
-            get => addAndDeleteButtonsEnabled;
+            get => actionButtonsEnabled;
             set
             {
-                addAndDeleteButtonsEnabled = value;
+                actionButtonsEnabled = value;
                 OnPropertyChanged();
             }
         }

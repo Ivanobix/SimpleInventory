@@ -21,8 +21,8 @@ public partial class MainPage : ContentPage
         vm.Items.Clear();
         MasterData.Instance.Comidas.ForEach(x => vm.Items.Add(x));
 
-        if (!vm.AddAndDeleteButtonsEnabled)
-            vm.AddAndDeleteButtonsEnabled = true;
+        if (!vm.ActionButtonsEnabled)
+            vm.ActionButtonsEnabled = true;
     }
 
     private void OnBebidaSectionClick(object sender, EventArgs e)
@@ -31,8 +31,8 @@ public partial class MainPage : ContentPage
         vm.Items.Clear();
         MasterData.Instance.Bebidas.ForEach(x => vm.Items.Add(x));
 
-        if (!vm.AddAndDeleteButtonsEnabled)
-            vm.AddAndDeleteButtonsEnabled = true;
+        if (!vm.ActionButtonsEnabled)
+            vm.ActionButtonsEnabled = true;
     }
 
     private async void OnAddClick(object sender, EventArgs e)
@@ -61,6 +61,33 @@ public partial class MainPage : ContentPage
                     }
                     break;
             }
+            MasterData.Instance.SaveStatus();
+        }
+    }
+
+    private async void OnEditClick(object sender, EventArgs e)
+    {
+        string productName = await DisplayPromptAsync("Editar", "Nombre del producto:", placeholder: vm.SelectedItem.Text);
+        if (!string.IsNullOrEmpty(productName))
+        {
+            switch (LastSectionSelected)
+            {
+                case Constants.ComidasKey:
+                    {
+                        MasterData.Instance.Comidas.Single(x => x.Text == vm.SelectedItem.Text).Text = productName;
+                        vm.Items.Clear();
+                        MasterData.Instance.Comidas.ForEach(x => vm.Items.Add(x));
+                        break;
+                    }
+                case Constants.BebidasKey:
+                    {
+                        MasterData.Instance.Bebidas.Single(x => x.Text == vm.SelectedItem.Text).Text = productName;
+                        vm.Items.Clear();
+                        MasterData.Instance.Bebidas.ForEach(x => vm.Items.Add(x));
+                    }
+                    break;
+            }
+            MasterData.Instance.SaveStatus();
         }
     }
 
@@ -79,6 +106,7 @@ public partial class MainPage : ContentPage
                     MasterData.Instance.Bebidas.Remove(vm.SelectedItem);
                     break;
             }
+            MasterData.Instance.SaveStatus();
         }
     }
 }
